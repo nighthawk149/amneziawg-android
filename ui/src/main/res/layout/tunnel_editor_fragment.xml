@@ -235,9 +235,88 @@
                                 android:imeOptions="actionDone"
                                 android:inputType="number"
                                 android:nextFocusUp="@id/listen_port_text"
+android:nextFocusDown="@id/jc_text"
+                                android:nextFocusForward="@id/jc_text"
+                                android:text="@={config.interface.mtu}"
+                                android:textAlignment="center" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/jc_label_layout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:hint="@string/jc"
+                            app:expandedHintEnabled="false"
+                            app:layout_constraintEnd_toStartOf="@+id/jmin_label_layout"
+                            app:layout_constraintHorizontal_weight="0.3"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/dns_servers_label_layout">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/jc_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint=""
+                                android:imeOptions="actionDone"
+                                android:inputType="number"
+                                android:nextFocusUp="@id/dns_servers_text"
+                                android:nextFocusDown="@id/set_excluded_applications"
+                                android:nextFocusForward="@id/jmin_text"
+                                android:text="@={config.interface.jc}"
+                                android:textAlignment="center" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/jmin_label_layout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_marginStart="4dp"
+                            android:hint="@string/jmin"
+                            app:expandedHintEnabled="false"
+                            app:layout_constraintEnd_toStartOf="@+id/jmax_label_layout"
+                            app:layout_constraintHorizontal_weight="0.3"
+                            app:layout_constraintStart_toEndOf="@+id/jc_label_layout"
+                            app:layout_constraintTop_toBottomOf="@+id/dns_servers_label_layout">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/jmin_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint=""
+                                android:imeOptions="actionDone"
+                                android:inputType="number"
+                                android:nextFocusUp="@id/dns_servers_text"
+                                android:nextFocusDown="@id/set_excluded_applications"
+                                android:nextFocusForward="@id/jmax_text"
+                                android:text="@={config.interface.jmin}"
+                                android:textAlignment="center" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/jmax_label_layout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:hint="@string/jmax"
+                            app:expandedHintEnabled="false"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_weight="0.3"
+                            app:layout_constraintStart_toEndOf="@+id/jmin_label_layout"
+                            app:layout_constraintTop_toBottomOf="@+id/dns_servers_label_layout">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/jmax_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint=""
+                                android:imeOptions="actionDone"
+                                android:inputType="number"
+                                android:nextFocusUp="@id/mtu_text"
                                 android:nextFocusDown="@id/set_excluded_applications"
                                 android:nextFocusForward="@id/set_excluded_applications"
-                                android:text="@={config.interface.mtu}"
+                                android:text="@={config.interface.jmax}"
                                 android:textAlignment="center" />
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -256,7 +335,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/mtu_label_layout"
+                            app:layout_constraintTop_toBottomOf="@+id/jc_label_layout"
                             app:rippleColor="?attr/colorSecondary"
                             tools:text="4 excluded applications" />
                     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -54,6 +54,27 @@ class InterfaceProxy : BaseObservable, Parcelable {
         }
 
     @get:Bindable
+    var jc: String = ""
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.jc)
+        }
+
+    @get:Bindable
+    var jmin: String = ""
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.jmin)
+        }
+
+    @get:Bindable
+    var jmax: String = ""
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.jmax)
+        }
+
+    @get:Bindable
     var privateKey: String = ""
         set(value) {
             field = value
@@ -76,6 +97,9 @@ class InterfaceProxy : BaseObservable, Parcelable {
         parcel.readStringList(includedApplications)
         listenPort = parcel.readString() ?: ""
         mtu = parcel.readString() ?: ""
+        jc = parcel.readString() ?: ""
+        jmin = parcel.readString() ?: ""
+        jmax = parcel.readString() ?: ""
         privateKey = parcel.readString() ?: ""
     }
 
@@ -89,6 +113,9 @@ class InterfaceProxy : BaseObservable, Parcelable {
         mtu = other.mtu.map { it.toString() }.orElse("")
         val keyPair = other.keyPair
         privateKey = keyPair.privateKey.toBase64()
+        jc = other.jc.map { it.toString() }.orElse("")
+        jmin = other.jmin.map { it.toString() }.orElse("")
+        jmax = other.jmax.map { it.toString() }.orElse("")
     }
 
     constructor()
@@ -112,6 +139,9 @@ class InterfaceProxy : BaseObservable, Parcelable {
         if (listenPort.isNotEmpty()) builder.parseListenPort(listenPort)
         if (mtu.isNotEmpty()) builder.parseMtu(mtu)
         if (privateKey.isNotEmpty()) builder.parsePrivateKey(privateKey)
+        if (jc.isNotEmpty()) builder.parseJc(jc)
+        if (jmin.isNotEmpty()) builder.parseJmin(jmin)
+        if (jmax.isNotEmpty()) builder.parseJmax(jmax)
         return builder.build()
     }
 
@@ -123,6 +153,9 @@ class InterfaceProxy : BaseObservable, Parcelable {
         dest.writeString(listenPort)
         dest.writeString(mtu)
         dest.writeString(privateKey)
+        dest.writeString(jc)
+        dest.writeString(jmin)
+        dest.writeString(jmax)
     }
 
     private class InterfaceProxyCreator : Parcelable.Creator<InterfaceProxy> {

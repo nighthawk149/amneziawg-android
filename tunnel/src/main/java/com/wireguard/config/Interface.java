@@ -46,6 +46,9 @@ public final class Interface {
     private final KeyPair keyPair;
     private final Optional<Integer> listenPort;
     private final Optional<Integer> mtu;
+private final Optional<Integer> jc;
+    private final Optional<Integer> jmin;
+    private final Optional<Integer> jmax;
 
     private Interface(final Builder builder) {
         // Defensively copy to ensure immutability even if the Builder is reused.
@@ -57,6 +60,9 @@ public final class Interface {
         keyPair = Objects.requireNonNull(builder.keyPair, "Interfaces must have a private key");
         listenPort = builder.listenPort;
         mtu = builder.mtu;
+jc = builder.jc;
+	    jmin = builder.jmin;
+    	jmax = builder.jmax;
     }
 
     /**
@@ -92,6 +98,15 @@ public final class Interface {
                 case "mtu":
                     builder.parseMtu(attribute.getValue());
                     break;
+                case "jc":
+                    builder.parseJc(attribute.getValue());
+                    break;
+                case "jmin":
+                    builder.parseJmin(attribute.getValue());
+                    break;
+                case "jmax":
+                    builder.parseJmax(attribute.getValue());
+                    break;
                 case "privatekey":
                     builder.parsePrivateKey(attribute.getValue());
                     break;
@@ -115,7 +130,10 @@ public final class Interface {
                 && includedApplications.equals(other.includedApplications)
                 && keyPair.equals(other.keyPair)
                 && listenPort.equals(other.listenPort)
-                && mtu.equals(other.mtu);
+                && mtu.equals(other.mtu)
+	        && jc.equals(other.jc)
+                && jmin.equals(other.jmin)
+		&& jmax.equals(other.jmax);
     }
 
     /**
@@ -195,6 +213,18 @@ public final class Interface {
         return mtu;
     }
 
+    public Optional<Integer> getJc() {
+        return jc;
+    }
+
+    public Optional<Integer> getJmin() {
+        return jmin;
+    }
+
+    public Optional<Integer> getJmax() {
+        return jmax;
+    }
+
     @Override
     public int hashCode() {
         int hash = 1;
@@ -205,6 +235,9 @@ public final class Interface {
         hash = 31 * hash + keyPair.hashCode();
         hash = 31 * hash + listenPort.hashCode();
         hash = 31 * hash + mtu.hashCode();
+hash = 31 * hash + jc.hashCode();
+        hash = 31 * hash + jmin.hashCode();
+        hash = 31 * hash + jmax.hashCode();
         return hash;
     }
 
@@ -245,6 +278,9 @@ public final class Interface {
         listenPort.ifPresent(lp -> sb.append("ListenPort = ").append(lp).append('\n'));
         mtu.ifPresent(m -> sb.append("MTU = ").append(m).append('\n'));
         sb.append("PrivateKey = ").append(keyPair.getPrivateKey().toBase64()).append('\n');
+jc.ifPresent(j -> sb.append("Jc = ").append(j).append('\n'));
+        jmin.ifPresent(jm -> sb.append("Jmin = ").append(jm).append('\n'));
+        jmax.ifPresent(jx -> sb.append("Jmax = ").append(jx).append('\n'));
         return sb.toString();
     }
 
@@ -258,6 +294,9 @@ public final class Interface {
         final StringBuilder sb = new StringBuilder();
         sb.append("private_key=").append(keyPair.getPrivateKey().toHex()).append('\n');
         listenPort.ifPresent(lp -> sb.append("listen_port=").append(lp).append('\n'));
+jc.ifPresent(j -> sb.append("jc=").append(j).append('\n'));
+        jmin.ifPresent(jm -> sb.append("jmin=").append(jm).append('\n'));
+        jmax.ifPresent(jx -> sb.append("jmax=").append(jx).append('\n'));
         return sb.toString();
     }
 
@@ -279,6 +318,9 @@ public final class Interface {
         private Optional<Integer> listenPort = Optional.empty();
         // Defaults to not present.
         private Optional<Integer> mtu = Optional.empty();
+private Optional<Integer> jc = Optional.empty();
+    	private Optional<Integer> jmin = Optional.empty();
+    	private Optional<Integer> jmax = Optional.empty();
 
         public Builder addAddress(final InetNetwork address) {
             addresses.add(address);
@@ -399,6 +441,30 @@ public final class Interface {
             }
         }
 
+        public Builder parseJc(final String jc) throws BadConfigException {
+            try {
+                return setJc(Integer.parseInt(jc));
+            } catch (final NumberFormatException e) {
+                throw new BadConfigException(Section.INTERFACE, Location.JC, jc, e);
+            }
+        }
+
+        public Builder parseJmin(final String jmin) throws BadConfigException {
+            try {
+                return setJmin(Integer.parseInt(jmin));
+            } catch (final NumberFormatException e) {
+                throw new BadConfigException(Section.INTERFACE, Location.JMIN, jmin, e);
+            }
+        }
+
+        public Builder parseJmax(final String jmax) throws BadConfigException {
+            try {
+                return setJmax(Integer.parseInt(jmax));
+            } catch (final NumberFormatException e) {
+                throw new BadConfigException(Section.INTERFACE, Location.JMAX, jmax, e);
+            }
+        }
+
         public Builder setKeyPair(final KeyPair keyPair) {
             this.keyPair = keyPair;
             return this;
@@ -414,9 +480,33 @@ public final class Interface {
 
         public Builder setMtu(final int mtu) throws BadConfigException {
             if (mtu < 0)
-                throw new BadConfigException(Section.INTERFACE, Location.LISTEN_PORT,
+                throw new BadConfigException(Section.INTERFACE, Location.MTU,
                         Reason.INVALID_VALUE, String.valueOf(mtu));
             this.mtu = mtu == 0 ? Optional.empty() : Optional.of(mtu);
+            return this;
+        }
+
+        public Builder setJc(final int jc) throws BadConfigException {
+            if (jc < 0)
+                throw new BadConfigException(Section.INTERFACE, Location.JC,
+                        Reason.INVALID_VALUE, String.valueOf(jc));
+            this.jc = jc == 0 ? Optional.empty() : Optional.of(jc);
+            return this;
+        }
+
+        public Builder setJmin(final int jmin) throws BadConfigException {
+            if (jmin < 0)
+                throw new BadConfigException(Section.INTERFACE, Location.JMIN,
+                        Reason.INVALID_VALUE, String.valueOf(jmin));
+            this.jmin = jmin == 0 ? Optional.empty() : Optional.of(jmin);
+            return this;
+        }
+
+        public Builder setJmax(final int jmax) throws BadConfigException {
+            if (jmax < 0)
+                throw new BadConfigException(Section.INTERFACE, Location.JMAX,
+                        Reason.INVALID_VALUE, String.valueOf(jmax));
+            this.jmax = jmax == 0 ? Optional.empty() : Optional.of(jmax);
             return this;
         }
     }
