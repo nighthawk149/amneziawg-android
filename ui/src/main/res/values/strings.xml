@@ -166,6 +166,13 @@
     <string name="jc">Jc</string>
     <string name="jmin">Jmin</string>
     <string name="jmax">Jmax</string>
+    <string name="s1">S1</string>
+    <string name="s2">S2</string>
+    <string name="h1">H1</string>
+    <string name="h2">H2</string>
+    <string name="h3">H3</string>
+    <string name="h4">H4</string>
+    <string name="incomp_warn">!WARNING!\nSettings below is incompatible with standard wireguard server.</string>
     <string name="multiple_tunnels_summary_off">Turning on one tunnel will turn off others</string>
     <string name="multiple_tunnels_summary_on">Multiple tunnels may be turned on simultaneously</string>
     <string name="multiple_tunnels_title">Allow multiple simultaneous tunnels</string>

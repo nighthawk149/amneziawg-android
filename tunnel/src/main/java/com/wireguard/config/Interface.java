@@ -46,9 +46,17 @@ public final class Interface {
     private final KeyPair keyPair;
     private final Optional<Integer> listenPort;
     private final Optional<Integer> mtu;
-private final Optional<Integer> jc;
+    private final Optional<Integer> jc;
     private final Optional<Integer> jmin;
     private final Optional<Integer> jmax;
+    private final Optional<Integer> s1;
+    private final Optional<Integer> s2;
+    private final Optional<Integer> h1;
+    private final Optional<Integer> h2;
+    private final Optional<Integer> h3;
+    private final Optional<Integer> h4;
+
+
 
     private Interface(final Builder builder) {
         // Defensively copy to ensure immutability even if the Builder is reused.
@@ -60,9 +68,15 @@ private final Optional<Integer> jc;
         keyPair = Objects.requireNonNull(builder.keyPair, "Interfaces must have a private key");
         listenPort = builder.listenPort;
         mtu = builder.mtu;
-jc = builder.jc;
-	    jmin = builder.jmin;
+        jc = builder.jc;
+        jmin = builder.jmin;
     	jmax = builder.jmax;
+        s1 = builder.s1;
+        s2 = builder.s2;
+        h1 = builder.h1;
+        h2 = builder.h2;
+        h3 = builder.h3;
+        h4 = builder.h4;
     }
 
     /**
@@ -107,6 +121,24 @@ jc = builder.jc;
                 case "jmax":
                     builder.parseJmax(attribute.getValue());
                     break;
+                case "s1":
+                    builder.parseS1(attribute.getValue());
+                    break;
+                case "s2":
+                    builder.parseS2(attribute.getValue());
+                    break;
+                case "h1":
+                    builder.parseH1(attribute.getValue());
+                    break;
+                case "h2":
+                    builder.parseH2(attribute.getValue());
+                    break;
+                case "h3":
+                    builder.parseH3(attribute.getValue());
+                    break;
+                case "h4":
+                    builder.parseH4(attribute.getValue());
+                    break;
                 case "privatekey":
                     builder.parsePrivateKey(attribute.getValue());
                     break;
@@ -131,9 +163,15 @@ jc = builder.jc;
                 && keyPair.equals(other.keyPair)
                 && listenPort.equals(other.listenPort)
                 && mtu.equals(other.mtu)
-	        && jc.equals(other.jc)
+	            && jc.equals(other.jc)
                 && jmin.equals(other.jmin)
-		&& jmax.equals(other.jmax);
+                && jmax.equals(other.jmax)
+                && s1.equals(other.s1)
+                && s2.equals(other.s2)
+                && h1.equals(other.h1)
+                && h2.equals(other.h2)
+                && h3.equals(other.h3)
+                && h4.equals(other.h4);
     }
 
     /**
@@ -224,6 +262,18 @@ jc = builder.jc;
     public Optional<Integer> getJmax() {
         return jmax;
     }
+    public Optional<Integer> getS1() { return s1; }
+    public Optional<Integer> getS2() { return s2; }
+    public Optional<Integer> getH1() {
+        return h1;
+    }
+    public Optional<Integer> getH2() { return h2; }
+    public Optional<Integer> getH3() {
+        return h3;
+    }
+    public Optional<Integer> getH4() {
+        return h4;
+    }
 
     @Override
     public int hashCode() {
@@ -235,9 +285,15 @@ jc = builder.jc;
         hash = 31 * hash + keyPair.hashCode();
         hash = 31 * hash + listenPort.hashCode();
         hash = 31 * hash + mtu.hashCode();
-hash = 31 * hash + jc.hashCode();
+        hash = 31 * hash + jc.hashCode();
         hash = 31 * hash + jmin.hashCode();
         hash = 31 * hash + jmax.hashCode();
+        hash = 31 * hash + s1.hashCode();
+        hash = 31 * hash + s2.hashCode();
+        hash = 31 * hash + h1.hashCode();
+        hash = 31 * hash + h2.hashCode();
+        hash = 31 * hash + h3.hashCode();
+        hash = 31 * hash + h4.hashCode();
         return hash;
     }
 
@@ -278,9 +334,15 @@ hash = 31 * hash + jc.hashCode();
         listenPort.ifPresent(lp -> sb.append("ListenPort = ").append(lp).append('\n'));
         mtu.ifPresent(m -> sb.append("MTU = ").append(m).append('\n'));
         sb.append("PrivateKey = ").append(keyPair.getPrivateKey().toBase64()).append('\n');
-jc.ifPresent(j -> sb.append("Jc = ").append(j).append('\n'));
+        jc.ifPresent(j -> sb.append("Jc = ").append(j).append('\n'));
         jmin.ifPresent(jm -> sb.append("Jmin = ").append(jm).append('\n'));
         jmax.ifPresent(jx -> sb.append("Jmax = ").append(jx).append('\n'));
+        s1.ifPresent(s1 -> sb.append("S1 = ").append(s1).append('\n'));
+        s2.ifPresent(s1 -> sb.append("S2 = ").append(s2).append('\n'));
+        h1.ifPresent(s1 -> sb.append("H1 = ").append(h1).append('\n'));
+        h2.ifPresent(s1 -> sb.append("H2 = ").append(h2).append('\n'));
+        h3.ifPresent(s1 -> sb.append("H3 = ").append(h3).append('\n'));
+        h4.ifPresent(s1 -> sb.append("H4 = ").append(h4).append('\n'));
         return sb.toString();
     }
 
@@ -294,9 +356,15 @@ jc.ifPresent(j -> sb.append("Jc = ").append(j).append('\n'));
         final StringBuilder sb = new StringBuilder();
         sb.append("private_key=").append(keyPair.getPrivateKey().toHex()).append('\n');
         listenPort.ifPresent(lp -> sb.append("listen_port=").append(lp).append('\n'));
-jc.ifPresent(j -> sb.append("jc=").append(j).append('\n'));
+        jc.ifPresent(j -> sb.append("jc=").append(j).append('\n'));
         jmin.ifPresent(jm -> sb.append("jmin=").append(jm).append('\n'));
         jmax.ifPresent(jx -> sb.append("jmax=").append(jx).append('\n'));
+        s1.ifPresent(s1 -> sb.append("s1=").append(s1).append('\n'));
+        s2.ifPresent(s1 -> sb.append("s2=").append(s2).append('\n'));
+        h1.ifPresent(s1 -> sb.append("h1=").append(h1).append('\n'));
+        h2.ifPresent(s1 -> sb.append("h2=").append(h2).append('\n'));
+        h3.ifPresent(s1 -> sb.append("h3=").append(h3).append('\n'));
+        h4.ifPresent(s1 -> sb.append("h4=").append(h4).append('\n'));
         return sb.toString();
     }
 
@@ -318,10 +386,15 @@ jc.ifPresent(j -> sb.append("jc=").append(j).append('\n'));
         private Optional<Integer> listenPort = Optional.empty();
         // Defaults to not present.
         private Optional<Integer> mtu = Optional.empty();
-private Optional<Integer> jc = Optional.empty();
+        private Optional<Integer> jc = Optional.empty();
     	private Optional<Integer> jmin = Optional.empty();
     	private Optional<Integer> jmax = Optional.empty();
-
+        private Optional<Integer> s1 = Optional.empty();
+        private Optional<Integer> s2 = Optional.empty();
+        private Optional<Integer> h1 = Optional.empty();
+        private Optional<Integer> h2 = Optional.empty();
+        private Optional<Integer> h3 = Optional.empty();
+        private Optional<Integer> h4 = Optional.empty();
         public Builder addAddress(final InetNetwork address) {
             addresses.add(address);
             return this;
@@ -465,6 +538,54 @@ private Optional<Integer> jc = Optional.empty();
             }
         }
 
+        public Builder parseS1(final String s1) throws BadConfigException {
+            try {
+                return setS1(Integer.parseInt(s1));
+            } catch (final NumberFormatException e) {
+                throw new BadConfigException(Section.INTERFACE, Location.S1, s1, e);
+            }
+        }
+
+        public Builder parseS2(final String s2) throws BadConfigException {
+            try {
+                return setS2(Integer.parseInt(s2));
+            } catch (final NumberFormatException e) {
+                throw new BadConfigException(Section.INTERFACE, Location.S2, s2, e);
+            }
+        }
+
+        public Builder parseH1(final String h1) throws BadConfigException {
+            try {
+                return setH1(Integer.parseInt(h1));
+            } catch (final NumberFormatException e) {
+                throw new BadConfigException(Section.INTERFACE, Location.H1, h1, e);
+            }
+        }
+
+        public Builder parseH2(final String h2) throws BadConfigException {
+            try {
+                return setH2(Integer.parseInt(h2));
+            } catch (final NumberFormatException e) {
+                throw new BadConfigException(Section.INTERFACE, Location.H2, h2, e);
+            }
+        }
+
+        public Builder parseH3(final String h3) throws BadConfigException {
+            try {
+                return setH3(Integer.parseInt(h3));
+            } catch (final NumberFormatException e) {
+                throw new BadConfigException(Section.INTERFACE, Location.H3, h3, e);
+            }
+        }
+
+        public Builder parseH4(final String h4) throws BadConfigException {
+            try {
+                return setH4(Integer.parseInt(h4));
+            } catch (final NumberFormatException e) {
+                throw new BadConfigException(Section.INTERFACE, Location.H4, h4, e);
+            }
+        }
+
         public Builder setKeyPair(final KeyPair keyPair) {
             this.keyPair = keyPair;
             return this;
@@ -507,6 +628,54 @@ private Optional<Integer> jc = Optional.empty();
                 throw new BadConfigException(Section.INTERFACE, Location.JMAX,
                         Reason.INVALID_VALUE, String.valueOf(jmax));
             this.jmax = jmax == 0 ? Optional.empty() : Optional.of(jmax);
+            return this;
+        }
+
+        public Builder setS1(final int s1) throws BadConfigException {
+            if (s1 < 0)
+                throw new BadConfigException(Section.INTERFACE, Location.S1,
+                        Reason.INVALID_VALUE, String.valueOf(s1));
+            this.s1 = s1 == 0 ? Optional.empty() : Optional.of(s1);
+            return this;
+        }
+
+        public Builder setS2(final int s2) throws BadConfigException {
+            if (s2 < 0)
+                throw new BadConfigException(Section.INTERFACE, Location.S2,
+                        Reason.INVALID_VALUE, String.valueOf(s2));
+            this.s2 = s2 == 0 ? Optional.empty() : Optional.of(s2);
+            return this;
+        }
+
+        public Builder setH1(final int h1) throws BadConfigException {
+            if (h1 < 0)
+                throw new BadConfigException(Section.INTERFACE, Location.H1,
+                        Reason.INVALID_VALUE, String.valueOf(h1));
+            this.h1 = h1 == 0 ? Optional.empty() : Optional.of(h1);
+            return this;
+        }
+
+        public Builder setH2(final int h2) throws BadConfigException {
+            if (h2 < 0)
+                throw new BadConfigException(Section.INTERFACE, Location.H2,
+                        Reason.INVALID_VALUE, String.valueOf(h2));
+            this.h2 = h2 == 0 ? Optional.empty() : Optional.of(h2);
+            return this;
+        }
+
+        public Builder setH3(final int h3) throws BadConfigException {
+            if (h3 < 0)
+                throw new BadConfigException(Section.INTERFACE, Location.H3,
+                        Reason.INVALID_VALUE, String.valueOf(h3));
+            this.h3 = h3 == 0 ? Optional.empty() : Optional.of(h3);
+            return this;
+        }
+
+        public Builder setH4(final int h4) throws BadConfigException {
+            if (h4 < 0)
+                throw new BadConfigException(Section.INTERFACE, Location.H4,
+                        Reason.INVALID_VALUE, String.valueOf(h4));
+            this.h4 = h4 == 0 ? Optional.empty() : Optional.of(h4);
             return this;
         }
     }

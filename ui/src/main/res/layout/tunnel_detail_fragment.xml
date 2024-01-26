@@ -362,6 +362,193 @@
                         tools:text="0" />
 
                     <TextView
+                        android:id="@+id/s1_label"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:labelFor="@+id/s1_text"
+                        android:text="@string/s1"
+                        android:visibility="@{!config.interface.s1.isPresent() ? android.view.View.GONE : android.view.View.VISIBLE}"
+                        app:layout_constraintEnd_toStartOf="@+id/s2_label"
+                        app:layout_constraintHorizontal_weight="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/jc_text" />
+
+                    <TextView
+                        android:id="@+id/s1_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/s1"
+                        android:nextFocusLeft="@id/listen_port_text"
+                        android:nextFocusUp="@id/dns_servers_text"
+                        android:nextFocusForward="@id/applications_text"
+                        android:onClick="@{ClipboardUtils::copyTextView}"
+                        android:text="@{config.interface.s1}"
+                        android:textAppearance="?attr/textAppearanceBodyLarge"
+                        android:visibility="@{!config.interface.s1.isPresent() ? android.view.View.GONE : android.view.View.VISIBLE}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="0.5"
+                        app:layout_constraintStart_toEndOf="@id/listen_port_label"
+                        app:layout_constraintStart_toStartOf="@+id/s1_label"
+                        app:layout_constraintTop_toBottomOf="@+id/s1_label"
+                        tools:text="0" />
+
+                    <TextView
+                        android:id="@+id/s2_label"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:labelFor="@+id/s2_text"
+                        android:text="@string/s2"
+                        android:visibility="@{!config.interface.s2.isPresent() ? android.view.View.GONE : android.view.View.VISIBLE}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/s1_label"
+                        app:layout_constraintTop_toBottomOf="@+id/jc_text" />
+
+                    <TextView
+                        android:id="@+id/s2_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/s2"
+                        android:nextFocusLeft="@id/listen_port_text"
+                        android:nextFocusUp="@id/dns_servers_text"
+                        android:nextFocusForward="@id/applications_text"
+                        android:onClick="@{ClipboardUtils::copyTextView}"
+                        android:text="@{config.interface.s2}"
+                        android:textAppearance="?attr/textAppearanceBodyLarge"
+                        android:visibility="@{!config.interface.s2.isPresent() ? android.view.View.GONE : android.view.View.VISIBLE}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="0.5"
+                        app:layout_constraintStart_toEndOf="@id/listen_port_label"
+                        app:layout_constraintStart_toStartOf="@+id/s2_label"
+                        app:layout_constraintTop_toBottomOf="@+id/s2_label"
+                        tools:text="0" />
+
+                    <TextView
+                        android:id="@+id/h1_label"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:labelFor="@+id/h1_text"
+                        android:text="@string/h1"
+                        android:visibility="@{!config.interface.h1.isPresent() ? android.view.View.GONE : android.view.View.VISIBLE}"
+                        app:layout_constraintEnd_toStartOf="@+id/h2_label"
+                        app:layout_constraintHorizontal_weight="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/s1_text" />
+
+                    <TextView
+                        android:id="@+id/h1_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/h1"
+                        android:nextFocusLeft="@id/listen_port_text"
+                        android:nextFocusUp="@id/dns_servers_text"
+                        android:nextFocusForward="@id/applications_text"
+                        android:onClick="@{ClipboardUtils::copyTextView}"
+                        android:text="@{config.interface.h1}"
+                        android:textAppearance="?attr/textAppearanceBodyLarge"
+                        android:visibility="@{!config.interface.h1.isPresent() ? android.view.View.GONE : android.view.View.VISIBLE}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="0.5"
+                        app:layout_constraintStart_toEndOf="@id/h1_label"
+                        app:layout_constraintStart_toStartOf="@+id/h1_label"
+                        app:layout_constraintTop_toBottomOf="@+id/h1_label"
+                        tools:text="0" />
+
+                    <TextView
+                        android:id="@+id/h2_label"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:labelFor="@+id/h2_text"
+                        android:text="@string/h2"
+                        android:visibility="@{!config.interface.h2.isPresent() ? android.view.View.GONE : android.view.View.VISIBLE}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/h1_label"
+                        app:layout_constraintTop_toBottomOf="@+id/s1_text" />
+
+                    <TextView
+                        android:id="@+id/h2_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/h2"
+                        android:nextFocusLeft="@id/listen_port_text"
+                        android:nextFocusUp="@id/dns_servers_text"
+                        android:nextFocusForward="@id/applications_text"
+                        android:onClick="@{ClipboardUtils::copyTextView}"
+                        android:text="@{config.interface.h2}"
+                        android:textAppearance="?attr/textAppearanceBodyLarge"
+                        android:visibility="@{!config.interface.h2.isPresent() ? android.view.View.GONE : android.view.View.VISIBLE}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="0.5"
+                        app:layout_constraintStart_toEndOf="@id/listen_port_label"
+                        app:layout_constraintStart_toStartOf="@+id/h2_label"
+                        app:layout_constraintTop_toBottomOf="@+id/h2_label"
+                        tools:text="0" />
+
+                    <TextView
+                        android:id="@+id/h3_label"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:labelFor="@+id/h3_text"
+                        android:text="@string/h3"
+                        android:visibility="@{!config.interface.h3.isPresent() ? android.view.View.GONE : android.view.View.VISIBLE}"
+                        app:layout_constraintEnd_toStartOf="@+id/h4_label"
+                        app:layout_constraintHorizontal_weight="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/h1_text" />
+
+                    <TextView
+                        android:id="@+id/h3_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/h3"
+                        android:nextFocusLeft="@id/listen_port_text"
+                        android:nextFocusUp="@id/dns_servers_text"
+                        android:nextFocusForward="@id/applications_text"
+                        android:onClick="@{ClipboardUtils::copyTextView}"
+                        android:text="@{config.interface.h3}"
+                        android:textAppearance="?attr/textAppearanceBodyLarge"
+                        android:visibility="@{!config.interface.h3.isPresent() ? android.view.View.GONE : android.view.View.VISIBLE}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.994"
+                        app:layout_constraintHorizontal_weight="0.5"
+                        app:layout_constraintStart_toEndOf="@id/listen_port_label"
+                        app:layout_constraintStart_toStartOf="@+id/h3_label"
+                        app:layout_constraintTop_toBottomOf="@+id/h3_label"
+                        tools:text="0" />
+
+                    <TextView
+                        android:id="@+id/h4_label"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:labelFor="@+id/h4_text"
+                        android:text="@string/h4"
+                        android:visibility="@{!config.interface.h4.isPresent() ? android.view.View.GONE : android.view.View.VISIBLE}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/h3_label"
+                        app:layout_constraintTop_toBottomOf="@+id/h1_text" />
+
+                    <TextView
+                        android:id="@+id/h4_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/h4"
+                        android:nextFocusLeft="@id/listen_port_text"
+                        android:nextFocusUp="@id/dns_servers_text"
+                        android:nextFocusForward="@id/applications_text"
+                        android:onClick="@{ClipboardUtils::copyTextView}"
+                        android:text="@{config.interface.h4}"
+                        android:textAppearance="?attr/textAppearanceBodyLarge"
+                        android:visibility="@{!config.interface.h4.isPresent() ? android.view.View.GONE : android.view.View.VISIBLE}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="0.5"
+                        app:layout_constraintStart_toEndOf="@id/listen_port_label"
+                        app:layout_constraintStart_toStartOf="@+id/h4_label"
+                        app:layout_constraintTop_toBottomOf="@+id/h4_label"
+                        tools:text="0" />
+
+                    <TextView
                         android:id="@+id/applications_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -370,7 +557,7 @@
                         android:text="@string/applications"
                         android:visibility="@{config.interface.includedApplications.isEmpty() &amp;&amp; config.interface.excludedApplications.isEmpty() ? android.view.View.GONE : android.view.View.VISIBLE}"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/jc_text" />
+                        app:layout_constraintTop_toBottomOf="@+id/h3_text" />
 
                     <TextView
                         android:id="@+id/applications_text"

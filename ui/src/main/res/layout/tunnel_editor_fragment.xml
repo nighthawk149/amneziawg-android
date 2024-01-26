@@ -49,7 +49,8 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:scrollbars="vertical">
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/interface_title"
@@ -235,7 +236,7 @@
                                 android:imeOptions="actionDone"
                                 android:inputType="number"
                                 android:nextFocusUp="@id/listen_port_text"
-android:nextFocusDown="@id/jc_text"
+                                android:nextFocusDown="@id/jc_text"
                                 android:nextFocusForward="@id/jc_text"
                                 android:text="@={config.interface.mtu}"
                                 android:textAlignment="center" />
@@ -261,7 +262,7 @@ android:nextFocusDown="@id/jc_text"
                                 android:imeOptions="actionDone"
                                 android:inputType="number"
                                 android:nextFocusUp="@id/dns_servers_text"
-                                android:nextFocusDown="@id/set_excluded_applications"
+                                android:nextFocusDown="@id/s1_text"
                                 android:nextFocusForward="@id/jmin_text"
                                 android:text="@={config.interface.jc}"
                                 android:textAlignment="center" />
@@ -288,7 +289,7 @@ android:nextFocusDown="@id/jc_text"
                                 android:imeOptions="actionDone"
                                 android:inputType="number"
                                 android:nextFocusUp="@id/dns_servers_text"
-                                android:nextFocusDown="@id/set_excluded_applications"
+                                android:nextFocusDown="@id/s1_text"
                                 android:nextFocusForward="@id/jmax_text"
                                 android:text="@={config.interface.jmin}"
                                 android:textAlignment="center" />
@@ -320,6 +321,177 @@ android:nextFocusDown="@id/jc_text"
                                 android:textAlignment="center" />
                         </com.google.android.material.textfield.TextInputLayout>
 
+                        <TextView
+                            android:id="@+id/incomp_warning"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/incomp_warn"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/jc_label_layout" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/s1_label_layout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:hint="@string/s1"
+                            app:expandedHintEnabled="false"
+                            app:layout_constraintEnd_toStartOf="@+id/s2_label_layout"
+                            app:layout_constraintHorizontal_weight="0.3"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/incomp_warning">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/s1_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint=""
+                                android:imeOptions="actionDone"
+                                android:inputType="number"
+                                android:nextFocusUp="@id/incomp_warning"
+                                android:nextFocusDown="@id/set_excluded_applications"
+                                android:nextFocusForward="@id/set_excluded_applications"
+                                android:text="@={config.interface.s1}"
+                                android:textAlignment="center" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/s2_label_layout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_marginStart="4dp"
+                            android:hint="@string/s2"
+                            app:expandedHintEnabled="false"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_weight="0.3"
+                            app:layout_constraintStart_toEndOf="@+id/s1_label_layout"
+                            app:layout_constraintTop_toBottomOf="@+id/incomp_warning">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/s2_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint=""
+                                android:imeOptions="actionDone"
+                                android:inputType="number"
+                                android:nextFocusUp="@id/incomp_warning"
+                                android:nextFocusDown="@id/set_excluded_applications"
+                                android:nextFocusForward="@id/set_excluded_applications"
+                                android:text="@={config.interface.s2}"
+                                android:textAlignment="center" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/h1_label_layout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:hint="@string/h1"
+                            app:expandedHintEnabled="false"
+                            app:layout_constraintEnd_toStartOf="@+id/h2_label_layout"
+                            app:layout_constraintHorizontal_weight="0.3"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/s1_label_layout">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/h1_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint=""
+                                android:imeOptions="actionDone"
+                                android:inputType="number"
+                                android:nextFocusUp="@id/s1_text"
+                                android:nextFocusDown="@id/set_excluded_applications"
+                                android:nextFocusForward="@id/set_excluded_applications"
+                                android:text="@={config.interface.h1}"
+                                android:textAlignment="center" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/h2_label_layout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:hint="@string/h2"
+                            app:expandedHintEnabled="false"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_weight="0.3"
+                            app:layout_constraintStart_toEndOf="@+id/h1_label_layout"
+                            app:layout_constraintTop_toBottomOf="@+id/s1_label_layout">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/h2_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint=""
+                                android:imeOptions="actionDone"
+                                android:inputType="number"
+                                android:nextFocusUp="@id/incomp_warning"
+                                android:nextFocusDown="@id/set_excluded_applications"
+                                android:nextFocusForward="@id/set_excluded_applications"
+                                android:text="@={config.interface.h2}"
+                                android:textAlignment="center" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/h3_label_layout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:hint="@string/h3"
+                            app:expandedHintEnabled="false"
+                            app:layout_constraintEnd_toStartOf="@+id/h4_label_layout"
+                            app:layout_constraintHorizontal_weight="0.3"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/h1_label_layout">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/h3_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint=""
+                                android:imeOptions="actionDone"
+                                android:inputType="number"
+                                android:nextFocusUp="@id/h1_text"
+                                android:nextFocusDown="@id/set_excluded_applications"
+                                android:nextFocusForward="@id/set_excluded_applications"
+                                android:text="@={config.interface.h4}"
+                                android:textAlignment="center" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/h4_label_layout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:hint="@string/h4"
+                            app:expandedHintEnabled="false"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_weight="0.3"
+                            app:layout_constraintStart_toEndOf="@+id/h3_label_layout"
+                            app:layout_constraintTop_toBottomOf="@+id/h1_label_layout">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/h4_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint=""
+                                android:imeOptions="actionDone"
+                                android:inputType="number"
+                                android:nextFocusUp="@id/h1_text"
+                                android:nextFocusDown="@id/set_excluded_applications"
+                                android:nextFocusForward="@id/set_excluded_applications"
+                                android:text="@={config.interface.h4}"
+                                android:textAlignment="center" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/set_excluded_applications"
                             style="@style/Widget.Material3.Button.TextButton"
@@ -332,12 +504,12 @@ android:nextFocusDown="@id/jc_text"
                             android:onClick="@{fragment::onRequestSetExcludedIncludedApplications}"
                             android:text="@{config.interface.includedApplications.size > 0 ? @plurals/set_included_applications(config.interface.includedApplications.size, config.interface.includedApplications.size) : config.interface.excludedApplications.size > 0 ? @plurals/set_excluded_applications(config.interface.excludedApplications.size, config.interface.excludedApplications.size) : @string/all_applications}"
                             android:textColor="?attr/colorSecondary"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/jc_label_layout"
+                            app:layout_constraintTop_toBottomOf="@+id/h3_label_layout"
                             app:rippleColor="?attr/colorSecondary"
                             tools:text="4 excluded applications" />
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
 

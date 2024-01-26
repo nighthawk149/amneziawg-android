@@ -75,6 +75,48 @@ class InterfaceProxy : BaseObservable, Parcelable {
         }
 
     @get:Bindable
+    var s1: String = ""
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.s1)
+        }
+
+    @get:Bindable
+    var s2: String = ""
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.s2)
+        }
+
+    @get:Bindable
+    var h1: String = ""
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.h1)
+        }
+
+    @get:Bindable
+    var h2: String = ""
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.h2)
+        }
+
+    @get:Bindable
+    var h3: String = ""
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.h3)
+        }
+
+    @get:Bindable
+    var h4: String = ""
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.h4)
+        }
+
+    @get:Bindable
     var privateKey: String = ""
         set(value) {
             field = value
@@ -116,6 +158,12 @@ class InterfaceProxy : BaseObservable, Parcelable {
         jc = other.jc.map { it.toString() }.orElse("")
         jmin = other.jmin.map { it.toString() }.orElse("")
         jmax = other.jmax.map { it.toString() }.orElse("")
+        s1 = other.s1.map { it.toString() }.orElse("")
+        s2 = other.s2.map { it.toString() }.orElse("")
+        h1 = other.h1.map { it.toString() }.orElse("")
+        h2 = other.h2.map { it.toString() }.orElse("")
+        h3 = other.h3.map { it.toString() }.orElse("")
+        h4 = other.h4.map { it.toString() }.orElse("")
     }
 
     constructor()
@@ -142,6 +190,12 @@ class InterfaceProxy : BaseObservable, Parcelable {
         if (jc.isNotEmpty()) builder.parseJc(jc)
         if (jmin.isNotEmpty()) builder.parseJmin(jmin)
         if (jmax.isNotEmpty()) builder.parseJmax(jmax)
+        if (s1.isNotEmpty()) builder.parseS1(s1)
+        if (s2.isNotEmpty()) builder.parseS2(s2)
+        if (h1.isNotEmpty()) builder.parseH1(h1)
+        if (h2.isNotEmpty()) builder.parseH2(h2)
+        if (h3.isNotEmpty()) builder.parseH3(h3)
+        if (h4.isNotEmpty()) builder.parseH4(h4)
         return builder.build()
     }
 
@@ -156,6 +210,12 @@ class InterfaceProxy : BaseObservable, Parcelable {
         dest.writeString(jc)
         dest.writeString(jmin)
         dest.writeString(jmax)
+        dest.writeString(s1)
+        dest.writeString(s2)
+        dest.writeString(h1)
+        dest.writeString(h2)
+        dest.writeString(h3)
+        dest.writeString(h4)
     }
 
     private class InterfaceProxyCreator : Parcelable.Creator<InterfaceProxy> {
